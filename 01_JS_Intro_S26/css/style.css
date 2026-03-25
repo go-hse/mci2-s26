@@ -1,0 +1,158 @@
+/* Grundkonfiguration */
+:root {
+	--header-height: 60px;
+	--footer-height: 40px;
+	--bg-color: #f4f4f9;
+	--primary-color: #333;
+	--text-white: #fff;
+	--gap: 1rem;
+	--btn-bg: #4f46e5;
+	--btn-hover: #4338ca;
+	--btn-shadow: rgba(79, 70, 229, 0.3);
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: sans-serif;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	background-color: var(--bg-color);
+}
+
+/* Fixierte Elemente */
+header,
+footer {
+	background: var(--primary-color);
+	color: var(--text-white);
+	display: flex;
+	align-items: center;
+	padding: 0 var(--gap);
+	width: 100%;
+	z-index: 100;
+}
+
+header {
+	height: var(--header-height);
+	position: fixed;
+	top: 0;
+}
+
+footer {
+	height: var(--footer-height);
+	position: fixed;
+	bottom: 0;
+	font-size: 0.5rem;
+}
+
+/* Hauptcontainer mit Padding für Header/Footer */
+main {
+	flex: 1;
+	/* Nimmt den restlichen Platz ein */
+	margin-top: var(--header-height);
+	margin-bottom: var(--footer-height);
+	display: flex;
+	flex-direction: column;
+}
+
+/* Das Flex-System */
+.row {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: var(--gap);
+	padding: var(--gap);
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+	gap: var(--gap);
+	flex: 1;
+}
+
+/* Hilfsklassen für Boxen-Größen */
+.flex-1 {
+	flex: 1;
+}
+
+.flex-2 {
+	flex: 2;
+}
+
+.box {
+	background: white;
+	padding: 1.5rem;
+	border-radius: 8px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Anpassung: Stapeln auf Mobilgeräten */
+@media (max-width: 768px) {
+	.row {
+		flex-direction: column;
+	}
+}
+
+.btn {
+	/* Struktur */
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.75rem 1.5rem;
+	border: none;
+	border-radius: 12px;
+	margin: 0.1rem;
+
+	/* Typografie */
+	font-size: 1rem;
+	text-decoration: none;
+	color: white;
+	cursor: pointer;
+
+	/* Look & Feel */
+	background: linear-gradient(135deg, var(--btn-bg), var(--btn-hover));
+	box-shadow: 0 4px 12px var(--btn-shadow);
+
+	/* Animationen */
+	transition: all 0.2s ease-in-out;
+	outline: none;
+	user-select: none;
+}
+
+/* Hover-Effekt: Leichtes Anheben */
+.btn:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 15px var(--btn-shadow);
+	filter: brightness(1.1);
+}
+
+/* Click-Effekt: Drücken */
+.btn:active {
+	transform: translateY(0);
+	box-shadow: 0 2px 6px var(--btn-shadow);
+}
+
+/* Fokus-Zustand für Barrierefreiheit */
+.btn:focus-visible {
+	box-shadow: 0 0 0 3px var(--bg-color), 0 0 0 6px var(--btn-bg);
+}
+
+/* Variante: Sekundär-Button */
+.btn-secondary {
+	background: #fff;
+	color: var(--primary-color);
+	border: 2px solid #e5e7eb;
+	box-shadow: none;
+}
+
+.btn-secondary:hover {
+	background: #f9fafb;
+	border-color: #d1d5db;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
