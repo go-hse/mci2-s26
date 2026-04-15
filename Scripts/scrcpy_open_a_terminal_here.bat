@@ -1,5 +1,8 @@
 @echo off
 
+:: copy this script in the scrcpy-directory
+:: start with double click in explorer
+
 echo Script Version 15.04.2026
 
 echo dev=adb devices
