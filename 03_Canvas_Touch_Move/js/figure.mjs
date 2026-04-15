@@ -56,7 +56,7 @@ export function createFigure(ctx, x, y) {
 
     function onTouchMove(id, pageX, pageY) {
         if (f1 && id === f1.id) {
-            f1.x = pageX; f1.y = pageY;
+            f1.x = pageX; f1.y = pageY; // Verantwortlich für Translation
         }
         if (f2 && id === f2.id) {
             f2.x = pageX; f2.y = pageY;
