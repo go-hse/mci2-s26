@@ -31,15 +31,43 @@ export function createUpath() {
     return upath;
 }
 
-export function fillPath(ctx, path, M, fillStyle = "#fff", strokeStyle = "#000", lineWidth = 0.1) {
+export function fillPath(ctx, path, x, y, sc, fillStyle = "#fff", strokeStyle = "#000", lineWidth = 0.1) {
     ctx.save();  // Speichern des Zustands mit der aktuellen Matrix auf Stack
-    ctx.setTransform(M);
+    ctx.translate(x, y);
+    ctx.scale(sc, sc);
+
+    const M = ctx.getTransform();
+
     ctx.fillStyle = fillStyle;
     ctx.lineWidth = lineWidth;
     ctx.strokeStyle = strokeStyle;
     ctx.fill(path);
     ctx.stroke(path);
     ctx.restore(); // Holen der gespeicherten Matrix vom Stack
+
+    return M;
+}
+
+export function fillPathTransform(ctx, path, T, fillStyle = "#fff", strokeStyle = "#000", lineWidth = 0.1) {
+    ctx.save();  // Speichern des Zustands mit der aktuellen Matrix auf Stack
+    ctx.setTransform(T);
+    ctx.fillStyle = fillStyle;
+    ctx.lineWidth = lineWidth;
+    ctx.strokeStyle = strokeStyle;
+    ctx.fill(path);
+    ctx.stroke(path);
+    ctx.restore(); // Holen der gespeicherten Matrix vom Stack
+}
+
+
+export function getTransform(ctx, x, y, alpha = 0, scale = 1) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(alpha);
+    ctx.scale(scale, scale);
+    let L = ctx.getTransform();
+    ctx.restore();
+    return L;
 }
 
 
