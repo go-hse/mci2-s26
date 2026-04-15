@@ -61,12 +61,11 @@ export function fillPathTransform(ctx, path, T, fillStyle = "#fff", strokeStyle 
 
 
 export function getTransform(ctx, x, y, alpha = 0, scale = 1) {
-    ctx.save();
+    ctx.resetTransform();
     ctx.translate(x, y);
     ctx.rotate(alpha);
     ctx.scale(scale, scale);
     let L = ctx.getTransform();
-    ctx.restore();
     return L;
 }
 
