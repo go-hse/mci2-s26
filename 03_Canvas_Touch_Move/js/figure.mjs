@@ -1,26 +1,34 @@
-import { createUpath, fillPath } from "./grafics.mjs";
+import { createUpath, fillPath, getTransform, fillPathTransform } from "./grafics.mjs";
 
 
 
 export function createFigure(ctx, x, y) {
-    let touched = false, identifier, M;
+    let touched = false, identifier;
 
     const uPath = createUpath();
+    let L = getTransform(ctx, x, y, 0, 20);  // L: lokales Koordsys
+    let P; // vor-berechnete Matrix für Bewegung 
+
+
 
 
     function draw(ctx) {
         // M: Transformations-Matrix mit Verschiebung, Skalierung
         if (touched)
-            M = fillPath(ctx, uPath, 100, 100, 40, "red");
+            fillPathTransform(ctx, uPath, L, "red");
         else
-            M = fillPath(ctx, uPath, 100, 100, 40, "green");
+            fillPathTransform(ctx, uPath, L, "green");
     }
 
     function onTouchStart(id, pageX, pageY) {
-        const I = (new DOMMatrix(M)).invertSelf();
-        const L = I.transformPoint(new DOMPoint(pageX, pageY));
-        touched = ctx.isPointInPath(uPath, L.x, L.y);
-        if (touched) identifier = id;
+        const I = (new DOMMatrix(L)).invertSelf();
+        const LT = I.transformPoint(new DOMPoint(pageX, pageY));
+        touched = ctx.isPointInPath(uPath, LT.x, LT.y);
+        if (touched) {
+            identifier = id;
+            P = getTransform(ctx, pageX, pageY).invertSelf().multiplySelf(L);
+            console.log("Grab", identifier);
+        }
     }
 
     function onTouchEnd(id) {
@@ -30,5 +38,13 @@ export function createFigure(ctx, x, y) {
         }
     }
 
-    return { draw, onTouchStart, onTouchEnd };
+    function onTouchMove(id, pageX, pageY) {
+        if (id === identifier) {
+            L = getTransform(ctx, pageX, pageY).multiplySelf(P);
+            console.log("Move", identifier, pageX, pageY);
+        }
+    }
+
+
+    return { draw, onTouchStart, onTouchEnd, onTouchMove };
 }
