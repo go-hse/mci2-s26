@@ -32,7 +32,7 @@ export function createJoystick(ctx, x, y) {
                 if (f1.alpha !== undefined) {
                     const alpha = Math.atan2(dy, dx);
                     const deltaAlpha = normalizeAngleDiff(alpha, f1.alpha);
-                    arrowTransform.rotateSelf(deltaAlpha);
+                    // arrowTransform.rotateSelf(deltaAlpha);
                 }
             }
             fillPathTransform(ctx, arrowPath, arrowTransform, "red");
