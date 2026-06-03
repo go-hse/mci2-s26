@@ -1,0 +1,58 @@
+{
+  "branzino-amarin.spz": {
+    "url": "https://sparkjs.dev/assets/splats/food/branzino-amarin.spz",
+    "directory": "splats/food"
+  },
+  "burger-from-amboy.spz": {
+    "url": "https://sparkjs.dev/assets/splats/food/burger-from-amboy.spz",
+    "directory": "splats/food"
+  },
+  "clams-and-caviar-by-ikoyi.spz": {
+    "url": "https://sparkjs.dev/assets/splats/food/clams-and-caviar-by-ikoyi.spz",
+    "directory": "splats/food"
+  },
+  "coral-caviar.spz": {
+    "url": "https://sparkjs.dev/assets/splats/food/coral-caviar.spz",
+    "directory": "splats/food"
+  },
+  "dessert.spz": {
+    "url": "https://sparkjs.dev/assets/splats/dessert.spz",
+    "directory": "splats"
+  },
+  "furry-logo-pedestal.spz": {
+    "url": "https://sparkjs.dev/assets/splats/furry-logo-pedestal.spz",
+    "directory": "splats"
+  },
+  "iberico-sandwich-by-reserve.spz": {
+    "url": "https://sparkjs.dev/assets/splats/food/iberico-sandwich-by-reserve.spz",
+    "directory": "splats/food"
+  },
+  "pad-thai.spz": {
+    "url": "https://sparkjs.dev/assets/splats/food/pad-thai.spz",
+    "directory": "splats/food"
+  },
+  "penguin.spz": {
+    "url": "https://sparkjs.dev/assets/splats/penguin.spz",
+    "directory": "splats"
+  },
+  "primerib-tamos.spz": {
+    "url": "https://sparkjs.dev/assets/splats/food/primerib-tamos.spz",
+    "directory": "splats/food"
+  },
+  "steaksandwich-mels.spz": {
+    "url": "https://sparkjs.dev/assets/splats/food/steaksandwich-mels.spz",
+    "directory": "splats/food"
+  },
+  "tomahawk-niku.spz": {
+    "url": "https://sparkjs.dev/assets/splats/food/tomahawk-niku.spz",
+    "directory": "splats/food"
+  },
+  "valley.spz": {
+    "url": "https://sparkjs.dev/assets/splats/valley.spz",
+    "directory": "splats"
+  },
+  "woobles.spz": {
+    "url": "https://sparkjs.dev/assets/splats/woobles.spz",
+    "directory": "splats"
+  }
+}

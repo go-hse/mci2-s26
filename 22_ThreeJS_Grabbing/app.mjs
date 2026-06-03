@@ -1,6 +1,7 @@
 import * as THREE from '../99_Lib/three.module.js';
 import { add, NO_OF_GEOS, createLine } from './js/geometry.mjs';
 import { mouse, keyboard } from './js/interaction2D.mjs';
+import { createRay } from './js/ray.mjs';
 
 console.log("ThreeJs " + THREE.REVISION);
 window.onload = function () {
@@ -65,6 +66,9 @@ window.onload = function () {
         }
     }
 
+    const rayFunc = createRay(arr);
+
+
     const setLinePos = createLine(scene);
 
     // Renderer erstellen
@@ -85,13 +89,45 @@ window.onload = function () {
     const scale = new THREE.Vector3();
     const direction = new THREE.Vector3();
     const endRay = new THREE.Vector3();
+
+    let intersectObject, grabbedObject, initialGrabbed;
+
     function render() {
         cursor.matrix.decompose(position, rotation, scale);
         direction.set(0, 1, 0);
         direction.applyQuaternion(rotation);
-        endRay.addVectors(position, direction.multiplyScalar(10));
+
+        if (intersectObject) {
+            intersectObject.object.material.emissive.set(0x000000);
+        }
+
+        if (grabbedObject === undefined) {
+            intersectObject = rayFunc(position, direction);
+            if (intersectObject) {
+                // console.log(intersectObject);
+                endRay.addVectors(position, direction.multiplyScalar(intersectObject.distance));
+                intersectObject.object.material.emissive.set(0x555555);
+            } else {
+                endRay.addVectors(position, direction.multiplyScalar(10));
+            }
+        } else {
+            endRay.addVectors(position, direction.multiplyScalar(intersectObject.distance));
+        }
+
+        if (grabbed) {
+            if (grabbedObject) {
+                grabbedObject.matrix.copy(cursor.matrix.clone().multiply(initialGrabbed));
+            } else if (intersectObject) {
+                grabbedObject = intersectObject.object;
+                initialGrabbed = cursor.matrix.clone().invert().multiply(grabbedObject.matrix);
+            }
+        } else {
+            grabbedObject = undefined;  // loeschen des "Flags", das in gegriffenes Obj. anzeigt,
+        }
+
         setLinePos(0, cursor.position);
         setLinePos(1, endRay);
+
         renderer.render(scene, camera);
     }
     renderer.setAnimationLoop(render);
