@@ -145,13 +145,17 @@ export function Slider(parent, cb) {
 
     function initGrab(cursor, item) {
         if (item === handleMesh) {
-            initialGrabbed = inWorld ? cursor.matrix.clone().invert().multiply(parent.matrix).multiply(sliderGroup.matrix) : cursor.matrix.clone().invert().multiply(sliderGroup.matrix);
+            initialGrabbed = inWorld ?
+                cursor.matrix.clone().invert().multiply(parent.matrix).multiply(sliderGroup.matrix) :
+                cursor.matrix.clone().invert().multiply(sliderGroup.matrix);
             if (inWorld) inverseWorld = parent.matrix.clone().invert();
         }
 
         else if (item === knobMesh) {
             initialMatrix = knobMesh.matrix.clone();
-            initialGrabbed = inWorld ? cursor.matrix.clone().invert().multiply(sliderGroup.matrix) : cursor.matrix.clone().invert().multiply(sliderGroup.matrix);
+            initialGrabbed = inWorld ?
+                cursor.matrix.clone().invert().multiply(sliderGroup.matrix) :
+                cursor.matrix.clone().invert().multiply(sliderGroup.matrix);
             if (inWorld) inverseWorld = parent.matrix.clone().invert();
             inverseMesh = sliderGroup.matrix.clone().invert();
         }
@@ -165,7 +169,9 @@ export function Slider(parent, cb) {
             sliderGroup.matrix.copy(inWorld ? inverseWorld.clone().multiply(cursor.matrix).multiply(initialGrabbed) : cursor.matrix.clone().multiply(initialGrabbed))
         }
         else if (item === knobMesh) {
-            const delta = inWorld ? inverseMesh.clone().multiply(inverseWorld).multiply(cursor.matrix).multiply(initialGrabbed) : inverseMesh.clone().multiply(cursor.matrix).multiply(initialGrabbed);
+            const delta = inWorld ?
+                inverseMesh.clone().multiply(inverseWorld).multiply(cursor.matrix).multiply(initialGrabbed) :
+                inverseMesh.clone().multiply(cursor.matrix).multiply(initialGrabbed);
             const dx = delta.elements[12];
             const restricted = new THREE.Matrix4().makeTranslation(dx, 0, 0);
             knobMesh.matrix.copy(restricted.multiply(initialMatrix));
