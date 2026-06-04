@@ -1,4 +1,4 @@
-import { XRControllerModelFactory } from '../../99_Lib/jsm/webxr/XRControllerModelFactory.js';
+import { XRControllerModelFactory } from 'three/addons/webxr/XRControllerModelFactory.js';
 
 // from three.js\examples\webxr_vr_ballshooter.html
 export function createVRcontrollers(scene, renderer, connect_cb) {

@@ -1,17 +1,18 @@
-import * as THREE from '../99_Lib/three.module.min.js';
+import * as THREE from 'three';
+
+import { loadSplat } from './js/splat.mjs';
 
 import { keyboard, mouse } from './js/interaction2D.mjs';
 import { add, createLine, loadSTL, randomMaterial, ToWireframe } from './js/geometry.mjs';
 import { Touchables, Slider, RotaryKnobs } from './js/widgets.mjs';
 import { createRay } from './js/ray.mjs';
 import { arPlanes } from './js/ar.mjs';
-// import { linePainter } from './js/sparkAssets.mjs';
 
 
 // VR- Buttons zum Starten des immersiven Modus  
-import { VRButton } from '../99_Lib/jsm/webxr/VRButton.js';
+import { VRButton } from 'three/addons/webxr/VRButton.js';
 import { ARButton } from 'three/addons/webxr/ARButton.js';
-import { XRControllerModelFactory } from '../99_Lib/jsm/webxr/XRControllerModelFactory.js';
+import { XRControllerModelFactory } from 'three/addons/webxr/XRControllerModelFactory.js';
 
 import { createVRcontrollers, showGamepad } from './js/vr.mjs';
 
@@ -125,6 +126,9 @@ window.onload = async function () {
     document.body.appendChild(renderer.domElement);
     renderer.xr.enabled = true;
 
+    // funktioniert nur in Wolvic-Browser
+    // loadSplat(world, renderer, "./models/Small_Castle.spz");
+
     const planeHandler = arPlanes(scene, renderer.xr);
     renderer.xr.addEventListener("planesdetected", planeHandler.onPlaneEvent);
 
@@ -182,8 +186,23 @@ window.onload = async function () {
     reticle.visible = false;
 
     // VR 
-    document.body.appendChild(VRButton.createButton(renderer));
-    document.body.appendChild(ARButton.createButton(renderer, { requiredFeatures: ['hit-test', 'plane-detection', "local-floor"] }));
+    {
+        const button = VRButton.createButton(renderer);
+        button.style.left = 'calc(40% - 50px)';
+        button.textContent = 'VR';
+        document.body.appendChild(button);
+        console.log("VR button added");
+    }
+
+    // AR
+    // {
+    //     const button = ARButton.createButton(renderer, { requiredFeatures: ['hit-test', 'plane-detection', "local-floor"] })
+    //     button.style.left = 'calc(60% - 50px)';
+    //     button.textContent = 'AR';
+    //     document.body.appendChild(button);
+    //     console.log("AR button added");
+    // }
+
 
 
     window.addEventListener('resize', onWindowResize);

@@ -252,6 +252,7 @@ window.onload = async function () {
         cursor.matrix.decompose(position, rotation, scale);
         laser_direction.applyQuaternion(rotation);
 
+        // Selektion der Kugeln mittels Kreuzprodukt
         const distances = physicalSpheres.map(item => diff.subVectors(item.position, position).cross(laser_direction).length());
         const minSelect = distances.indexOf(Math.min(...distances));
         if (minSelect !== selected) {

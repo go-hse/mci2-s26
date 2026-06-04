@@ -1,8 +1,8 @@
-import * as THREE from '../../99_Lib/three.module.min.js';
+import * as THREE from 'three';
 
-import { GLTFLoader } from '../../99_Lib/jsm/loaders/GLTFLoader.js';
-import { STLLoader } from '../../99_Lib/jsm/loaders//STLLoader.js';
-import { mergeVertices } from '../../99_Lib/jsm/utils/BufferGeometryUtils.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { STLLoader } from 'three/addons/loaders/STLLoader.js';
+import { mergeVertices } from 'three/addons/utils/BufferGeometryUtils.js';
 
 // import vertexShader from '../shaders/vertexShader.glsl'
 // import fragmentShader from '../shaders/fragmentShader.glsl'
@@ -66,6 +66,8 @@ export async function shaderMaterial(vertexShaderFile, fragmentShaderFile) {
 }
 
 console.log("ThreeJs ", THREE.REVISION, new Date().toLocaleTimeString());
+
+
 
 
 const loader = new GLTFLoader();
